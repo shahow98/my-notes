@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>POI(一) | NOTES</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="shahow's notes">
+    
+    <link rel="preload" href="/notes/assets/css/0.styles.aa6162e3.css" as="style"><link rel="preload" href="/notes/assets/js/app.3c87835c.js" as="script"><link rel="preload" href="/notes/assets/js/2.ccd32cf6.js" as="script"><link rel="preload" href="/notes/assets/js/14.5c1e6475.js" as="script"><link rel="prefetch" href="/notes/assets/js/10.e74b660e.js"><link rel="prefetch" href="/notes/assets/js/11.ba9cc4ad.js"><link rel="prefetch" href="/notes/assets/js/12.56d107ff.js"><link rel="prefetch" href="/notes/assets/js/13.f1d5b157.js"><link rel="prefetch" href="/notes/assets/js/15.a128062c.js"><link rel="prefetch" href="/notes/assets/js/16.9f9c7ffc.js"><link rel="prefetch" href="/notes/assets/js/17.1fa8c72c.js"><link rel="prefetch" href="/notes/assets/js/18.fa98ee4f.js"><link rel="prefetch" href="/notes/assets/js/19.139875e6.js"><link rel="prefetch" href="/notes/assets/js/20.d01c81b7.js"><link rel="prefetch" href="/notes/assets/js/21.d14ce60a.js"><link rel="prefetch" href="/notes/assets/js/22.fc527ece.js"><link rel="prefetch" href="/notes/assets/js/23.42bccf3c.js"><link rel="prefetch" href="/notes/assets/js/24.feb7023c.js"><link rel="prefetch" href="/notes/assets/js/25.c40531f5.js"><link rel="prefetch" href="/notes/assets/js/26.0ae20a4b.js"><link rel="prefetch" href="/notes/assets/js/3.c53e1aaa.js"><link rel="prefetch" href="/notes/assets/js/4.a12cf40c.js"><link rel="prefetch" href="/notes/assets/js/5.c6377d92.js"><link rel="prefetch" href="/notes/assets/js/6.f65fa6bc.js"><link rel="prefetch" href="/notes/assets/js/7.708cf71a.js"><link rel="prefetch" href="/notes/assets/js/8.322cd020.js"><link rel="prefetch" href="/notes/assets/js/9.b8529d16.js">
+    <link rel="stylesheet" href="/notes/assets/css/0.styles.aa6162e3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/notes/" class="home-link router-link-active"><img src="/notes/imgs/logo.jpg" alt="NOTES" class="logo"> <span class="site-name can-hide">NOTES</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/notes/java/" aria-current="page" class="sidebar-link">Java</a></li><li><a href="/notes/java/spring/" class="sidebar-link">Spring</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="poi-一"><a href="#poi-一" class="header-anchor">#</a> POI(一)</h1> <p>Java POI-3.17</p> <h4 id="单元格相关"><a href="#单元格相关" class="header-anchor">#</a> 单元格相关</h4> <ul><li><strong>文本格式</strong></li></ul> <p><img src="C:%5CUsers%5Cshahow%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726172526341.png" alt="image-20200726172526341"></p> <p>通常，Excel的单元格格式能够根据输入的值进行智能转换（其实没那么智能），所以更多的    是在智能转换不满足需求时，需要手动规范单元格格式，即自定义格式。</p> <p><strong>CellStyle</strong>通过<strong>void setDataFormat(short fmt);<strong>方法设置单元格自定义格式。但由于参数是short类型，所以需要通过</strong>DataFormat</strong>提供的**short getFormat(String format);**方法进行转换，该方法format参数的值只要传入如上图中Excel支持的类型即可。</p> <p>示例：</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token comment">/**
+     * 设置单元格自定义格式
+     * @param workbook 工作薄
+     * @param format 自定义格式
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">CellStyle</span> <span class="token function">getCellStyleDataFormat</span><span class="token punctuation">(</span><span class="token class-name">Workbook</span> workbook<span class="token punctuation">,</span> <span class="token class-name">String</span> format<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    	<span class="token class-name">CellStyle</span> cellStyle <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createCellStyle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">DataFormat</span> dataFormat <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createDataFormat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setDataFormat</span><span class="token punctuation">(</span>dataFormat<span class="token punctuation">.</span><span class="token function">getFormat</span><span class="token punctuation">(</span>format<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> cellStyle<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><p><strong>!<strong>单元格文本格式是弱约束（不知道是不是这么定义），如果输入的值符合或者能够被转换为设置的格式（数字、日期、货币等），那么Excel将按设置的单元格格式进行展示。否则，如果数据不能匹配设置的格式，那么格式将以&quot;文本&quot;格式进行展示，即单元格不做任何处理直接展示传入的值。如果要做正确性验证，通过单元格数据有效性</strong>DVConstraint</strong>绑定实现（先挖个坑）。</p> <ul><li><strong>边框</strong></li></ul> <p><strong>CellStyle</strong>支持设置单元格的上下左右边框样式。<strong>BorderStyle</strong>枚举中定义了边框的类型。</p> <p>如下：</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token comment">/** 
+	 * 边框设置
+     * @param workbook
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">CellStyle</span> <span class="token function">getCellStyleBorder</span><span class="token punctuation">(</span><span class="token class-name">Workbook</span> workbook<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">CellStyle</span> cellStyle <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createCellStyle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setBorderTop</span><span class="token punctuation">(</span><span class="token class-name">BorderStyle</span><span class="token punctuation">.</span>THIN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setBorderBottom</span><span class="token punctuation">(</span><span class="token class-name">BorderStyle</span><span class="token punctuation">.</span>THIN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setBorderLeft</span><span class="token punctuation">(</span><span class="token class-name">BorderStyle</span><span class="token punctuation">.</span>THIN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setBorderRight</span><span class="token punctuation">(</span><span class="token class-name">BorderStyle</span><span class="token punctuation">.</span>THIN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> cellStyle<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><ul><li><strong>字体</strong></li></ul> <p><strong>Font</strong>接口提供了一系列的方法设置字体、大小、颜色、粗体等字体样式。而<strong>CellStyle</strong>接口则提供了**void setFont(Font font);**方法用于设置单元格字体。</p> <p>如下:</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token comment">/**
+     * 设置单元格字体
+     * @param workbook 工作薄
+     * @return
+     */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">CellStyle</span> <span class="token function">getCellStyleFont</span><span class="token punctuation">(</span><span class="token class-name">Workbook</span> workbook<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">CellStyle</span> cellStyle <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createCellStyle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Font</span> font <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createFont</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token comment">/*
+    	//设置字体样式
+        font.setFontName(&quot;Times New Roman&quot;); //设置字体类型
+        font.setFontHeightInPoints((short) 10); //设置字体大小
+        font.setBold(true);//字体加粗
+        font.setColor(Font.COLOR_RED);//红色
+    	*/</span>
+    	<span class="token comment">//设置单元格字体样式</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setFont</span><span class="token punctuation">(</span>font<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> cellStyle<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><ul><li><strong>填充</strong></li></ul> <p>填充同样可以通过<strong>CellStyle</strong>直接设置。通过**void setFillPattern(FillPatternType fp);<strong>设置填充的样式，通过</strong>void setFillForegroundColor(short bg);**设置填充的颜色。</p> <p>如下：</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token comment">/** 
+	 * 填充设置
+     * @param workbook
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">CellStyle</span> <span class="token function">getCellStyleBorder</span><span class="token punctuation">(</span><span class="token class-name">Workbook</span> workbook<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">CellStyle</span> cellStyle <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createCellStyle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setFillPattern</span><span class="token punctuation">(</span><span class="token class-name">FillPatternType</span><span class="token punctuation">.</span>SOLID_FOREGROUND<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cellStyle<span class="token punctuation">.</span><span class="token function">setFillForegroundColor</span><span class="token punctuation">(</span><span class="token class-name">IndexedColors</span><span class="token punctuation">.</span>ORANGE<span class="token punctuation">.</span><span class="token function">getIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> cellStyle<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><ul><li><strong>CellStyle</strong>样式覆盖</li></ul> <p><strong>CellStyle</strong>使用不当可能会出现样式覆盖的问题。</p> <p>如下：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">demo1</span><span class="token punctuation">(</span><span class="token class-name">CellStyle</span> cellStyle<span class="token punctuation">,</span> <span class="token class-name">Row</span> row<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    	<span class="token comment">/*
+    	1、假设这里对cellStyle设置了单元格样式
+    	*/</span>
+    	<span class="token class-name">Cell</span> cell1 <span class="token operator">=</span> row<span class="token punctuation">.</span><span class="token function">createCell</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//在row行1列创建一个单元格</span>
+    	cell1<span class="token punctuation">.</span><span class="token function">setCellStyle</span><span class="token punctuation">(</span>cellStyle<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置单元格样式</span>
+    	<span class="token comment">/*
+    	2、假设这里对cellStyle单元格样式进行了修改
+    	*/</span>
+    	<span class="token class-name">Cell</span> cell2 <span class="token operator">=</span> row<span class="token punctuation">.</span><span class="token function">createCell</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//在row行2列创建一个单元格</span>
+    	cell2<span class="token punctuation">.</span><span class="token function">setCellStyle</span><span class="token punctuation">(</span>cellStyle<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置单元格样式</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><p><strong>CellStyle</strong>对象实例后，作用域在整个<strong>Workbook</strong>对象，而不是<strong>Cell</strong>独有。所以，如果多个<strong>Cell</strong>对象需要不同的样式风格，那么<strong>CellStyle</strong>对象同样需要设置多个（Poi中规定了最大数量为4000）。否则，被修改的<strong>CellStyle</strong>对象同样会作用到Workbook中所有setCellStyle该cellStyle的<strong>Cell</strong>对象中，导致之前设置的单元格风格被覆盖。</p> <ul><li>单元格样式克隆</li></ul> <p><strong>CellStyle</strong>提供了**void cloneStyleFrom(CellStyle source);**方法用于克隆样式。通过样式继承的思路，不仅可以提高CellStyle对象的利用率，还可以减少很多的代码量。</p> <p>如下:</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token comment">/**
+     * 克隆原CellStyle,防止之前设置的样式被覆盖
+     * @param workbook
+     * @param source
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">CellStyle</span> <span class="token function">cloneCellStyleFrom</span><span class="token punctuation">(</span><span class="token class-name">Workbook</span> workbook<span class="token punctuation">,</span> <span class="token class-name">CellStyle</span> source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">CellStyle</span> dest <span class="token operator">=</span> workbook<span class="token punctuation">.</span><span class="token function">createCellStyle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dest<span class="token punctuation">.</span><span class="token function">cloneStyleFrom</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/*
+        这里可以在克隆样式的基础上做一些样式修改
+        */</span>
+        <span class="token keyword">return</span> dest<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><ul><li>按列设置单元格样式</li></ul> <p>通常单元格样式是按列进行样式设置的，所以<strong>Sheet</strong>提供了一个**void setDefaultColumnStyle(int column, CellStyle style);**方法进行按列为单位设置单元格样式。</p> <p>如下：</p> <div class="language-java extra-class"><pre class="language-java"><code>    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">demo2</span><span class="token punctuation">(</span><span class="token class-name">Sheet</span> sheet<span class="token punctuation">,</span> <span class="token keyword">int</span> colIndex<span class="token punctuation">,</span> <span class="token class-name">CellStyle</span> cellStyle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sheet<span class="token punctuation">.</span><span class="token function">setDefaultColumnStyle</span><span class="token punctuation">(</span>colIndex<span class="token punctuation">,</span> cellStyle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/notes/assets/js/app.3c87835c.js" defer></script><script src="/notes/assets/js/2.ccd32cf6.js" defer></script><script src="/notes/assets/js/14.5c1e6475.js" defer></script>
+  </body>
+</html>

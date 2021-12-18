@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/notes/',
     title: 'NOTES',
     description: 'shahow\'s notes',
     host: '127.0.0.1',
