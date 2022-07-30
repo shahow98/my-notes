@@ -7,18 +7,28 @@ module.exports = {
     themeConfig: {
         logo: '/imgs/logo.jpg',
         sidebar:{
+            '/java/JAXB/': [
+                '',
+                'JAXB添加CDATA'
+            ],
             '/java/spring/':[
                 '',
                 'value'
             ],
-            'java/poi/': [
+            '/java/poi/': [
                 '',
                 'poi-1',
                 'poi-2'
             ],
             '/java/': [
                 '',
-                'spring/'
+                'JAXB/',
+                'spring/',
+                'poi/',
+                '异常是否会影响代码运行',
+                '注解继承性',
+                'System.getProperty',
+                '正则需要转义的特殊字符'
             ],
             '/javascript/vue/': [
                 '',
